@@ -2,22 +2,23 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { getUsuarios } from "@/services/userService";
 
-export const usuariosStore = defineStore('users', () => {
+type typeUsuarios = {
+    name: string,
+    email:string,
+    city: string
+}
 
-    type typeUsuarios = {
-        name: string,
-        email:string,
-        city: string
-    }
+export const funcionCargarUsuario = defineStore('users', () => {
+
 
     const usuarios = ref<typeUsuarios[]>([])
 
-    const cargarUsuario = () => {
+    const cargarUsuarios = () => {
         usuarios.value = getUsuarios()
     }
 
     return {
         usuarios,
-        cargarUsuario
+        cargarUsuarios
     }
 })

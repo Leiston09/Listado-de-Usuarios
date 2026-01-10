@@ -5,13 +5,14 @@
             <input type="text" v-model="buscarUsuario" placeholder="Buscar por Nombre">
         </div>
         <ul>
-            <li v-for="(usuario , id) in filtarUsuarios"
+            <li v-for="(usuario , id) in filtrarUsuarios"
             :key="id">
-                <strong>
-                    {{ usuario.name }}
-                </strong>
-                <p>{{ usuario.email }}</p>
-                <p>{{ usuario.city }}</p>
+                <router-link 
+                :to="`/usuarios/${id}`">
+                    <strong>
+                            {{ usuario.name }}
+                    </strong>
+                </router-link>
                 <hr>
             </li>
         </ul>   
@@ -20,23 +21,23 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
-import { usuariosStore } from '@/stores/usuarioStore';
+import { funcionCargarUsuario } from '@/stores/cargarUsuarios';
 import { storeToRefs } from 'pinia';
 
 
-const usuarioStore = usuariosStore()
-const {usuarios} = storeToRefs(usuarioStore)
 
 const buscarUsuario = ref('')
 
-const filtarUsuarios = computed(() => {
+const funtionsCargarUsuario = funcionCargarUsuario()
+
+const {usuarios} = storeToRefs(funtionsCargarUsuario)
+
+const filtrarUsuarios = computed(() => {
     return usuarios.value.filter(usuario => usuario.name.toLowerCase().includes(buscarUsuario.value.toLowerCase()))
 })
 
-
-
 onMounted(() => {
-    usuarioStore.cargarUsuario()
+    funtionsCargarUsuario.cargarUsuarios()
 })
 
 
