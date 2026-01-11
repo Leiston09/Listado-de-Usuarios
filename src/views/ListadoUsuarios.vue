@@ -5,12 +5,12 @@
             <input type="text" v-model="buscarUsuario" placeholder="Buscar por Nombre">
         </div>
         <ul>
-            <li v-for="(usuario , id) in filtrarUsuarios"
-            :key="id">
+            <li v-for="(usuario) in filtrarUsuarios"
+            :key="usuario.id">
                 <router-link 
-                :to="`/usuarios/${id}`">
+                :to="`/usuarios/${usuario.id}`">
                     <strong>
-                            {{ usuario.name }}
+                            {{ usuario.name}}
                     </strong>
                 </router-link>
                 <hr>
@@ -18,6 +18,9 @@
         </ul>   
     </div>
 </template>
+
+
+
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';

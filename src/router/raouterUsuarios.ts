@@ -1,5 +1,5 @@
 import ListadoUsuarios from "@/views/ListadoUsuarios.vue";
-import DetallesUsuarios from "@/views/detallesUsuarios.vue";
+import DetallesUsuarios from "@/views/DetallesUsuarios.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
