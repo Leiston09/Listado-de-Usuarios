@@ -22,40 +22,39 @@
       </div>
     </div>
 
-    <button 
-      @click="$router.back()" 
-      class="mt-8 w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700 transition-colors"
-    >
-      Volver atrás
-    </button>
+    <div class=" border-gray-300 rounded-lg overflow-hidden p-4 bg-white shadow-md ">
+      <router-link 
+        :to="{ name: 'listado' }"
+        class=" bg"
+      >
+        Volver atrás
+      </router-link>      
+    </div>
+
+
 
   </div>
 </template>
 
 
-
-
-
-
 <script lang="ts" setup>
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { funcionCargarUsuario } from '@/stores/cargarUsuarios'
-import { storeToRefs } from 'pinia'
+import { updateDataUsers } from '@/stores/cargarUsuarios'
 
-const route = useRoute()
-const  cargarUsuarios = funcionCargarUsuario()
-const { usuarios } = storeToRefs(cargarUsuarios)
+const usersdata = updateDataUsers()
+const router = useRoute()
+//const  cargarUsuarios = funcionCargarUsuario()
+//const { usuarios } = storeToRefs(cargarUsuarios)
 
 onMounted(() => {
-  if (usuarios.value.length === 0) {
-    cargarUsuarios.cargarUsuarios()
-  }
+  usersdata.dataUsers()
 })
 
 const usuario = computed(() => {
-  const id = Number(route.params.id)
-  return usuarios.value.find(usuarioId => usuarioId.id === id)
+  const id = router.params.id
+  return usersdata.users.find(user => user.id  === Number(id))
 })
 
 </script>
+

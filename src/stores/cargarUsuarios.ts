@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { getUsuarios } from "@/services/usuariosService";
+import { getUsers } from "@/services/usuariosService";
 
 type typeUsuario = {
   id: number
@@ -26,19 +26,16 @@ type typeUsuario = {
   }
 }
 
+export const updateDataUsers = defineStore('users', () => {
 
+    const users = ref<typeUsuario[]>([])
 
-export const funcionCargarUsuario = defineStore('users', () => {
-
-
-    const usuarios = ref<typeUsuario[]>([])
-
-    const cargarUsuarios = async () => {
-        usuarios.value = await getUsuarios()
+    const dataUsers = async () => {
+        users.value = await getUsers()
     }
 
     return {
-        usuarios,
-        cargarUsuarios
+        users,
+        dataUsers
     }
 })
